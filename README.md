@@ -6,7 +6,7 @@
 
 Adds a command for opening the current file or project in [Transmit](https://panic.com/transmit).
 
-Since Transmit doesn't provide a command line utility for interacting with it, this is implemented via an AppleScript.
+Since Transmit doesn't provide a command line utility for interacting with it, this is implemented via an AppleScript. If you want to open something in Transmit's right panel be sure the "Local Browser" is active, instead of the "Remote Browser".
 
 ## Install
 
@@ -18,7 +18,7 @@ ext install vscode-open-in-transmit
 
 ## Usage
 
-It adds 1 command to the command palette:
+It adds 2 commands to the command palette:
 
 ```js
 'Open in Transmit (Left)' // Open the current file or project in Transmit's left panel

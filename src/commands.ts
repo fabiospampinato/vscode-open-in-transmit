@@ -8,7 +8,7 @@ import * as vscode from 'vscode';
 
 /* COMMANDS */
 
-//FIXME: Ensuring the `Local Browser` section is selected requires Accessibility API priviledges
+//FIXME: Ensuring the `Local Browser` section is selected requires Accessibility API priviledges, maybe add a setting for enabling this
 
 function open ( direction = 'left' ) {
 
