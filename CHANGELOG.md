@@ -1,3 +1,6 @@
+### Version 1.0.3
+- Optimize activation events
+
 ### Version 1.0.2
 - Updated readme
 
