@@ -1,20 +1,17 @@
 
 /* IMPORT */
 
-import * as absolute from 'absolute';
 import * as applescript from 'applescript';
-import * as path from 'path';
 import * as vscode from 'vscode';
+import Utils from './utils';
 
 /* COMMANDS */
 
-//FIXME: Ensuring the `Local Browser` section is selected requires Accessibility API priviledges, maybe add a setting for enabling this
-
-function open ( direction = 'left' ) {
+function open ( direction = 'left', root? ) {
 
   const {activeTextEditor} = vscode.window,
-        editorPath = activeTextEditor ? activeTextEditor.document.fileName : undefined,
-        folderPath = editorPath && absolute ( editorPath ) ? path.dirname ( editorPath ) : vscode.workspace.rootPath;
+        editorPath = activeTextEditor && activeTextEditor.document.fileName,
+        folderPath = Utils.folder.getWrapperPath ( editorPath, root );
 
   if ( !folderPath ) return vscode.window.showErrorMessage ( 'You have to open a project or a file before opening it in Transmit' );
 
@@ -51,6 +48,18 @@ function openRight () {
 
 }
 
+function openRootLeft () {
+
+  return open ( 'left', true );
+
+}
+
+function openRootRight () {
+
+  return open ( 'right', true );
+
+}
+
 /* EXPORT */
 
-export {open, openLeft, openRight};
+export {open, openLeft, openRight, openRootLeft, openRootRight};

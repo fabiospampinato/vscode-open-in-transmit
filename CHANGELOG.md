@@ -1,3 +1,7 @@
+### Version 1.1.0
+- Added multi-root support
+- Added `Open Root` commands
+
 ### Version 1.0.3
 - Optimize activation events
 
