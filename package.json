@@ -1,9 +1,9 @@
 {
   "name": "vscode-open-in-transmit",
   "displayName": "Open in Transmit",
-  "description": "Adds a command for opening the current file or project in Transmit.",
+  "description": "Adds a few commands for opening the current file or project in Transmit.",
   "icon": "resources/logo-128x128.png",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "license": "MIT",
   "main": "out/src/extension.js",
   "publisher": "fabiospampinato",
@@ -14,6 +14,17 @@
     "onCommand:openInTransmit.openRootRight"
   ],
   "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Open in Transmit - Configuration",
+      "properties": {
+        "openInTransmit.switchToLocalBrowser": {
+          "type": "boolean",
+          "description": "Automatically switch to the local browser",
+          "default": true
+        }
+      }
+    },
     "commands": [
       {
         "command": "openInTransmit.openLeft",

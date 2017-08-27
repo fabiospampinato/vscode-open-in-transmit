@@ -3,6 +3,7 @@
 
 import * as applescript from 'applescript';
 import * as vscode from 'vscode';
+import Config from './config';
 import Utils from './utils';
 
 /* COMMANDS */
@@ -15,15 +16,22 @@ function open ( direction = 'left', root? ) {
 
   if ( !folderPath ) return vscode.window.showErrorMessage ( 'You have to open a project or a file before opening it in Transmit' );
 
-  const directionKey = ( direction === 'left' ) ? 123 : 124;
-  const script = `
+  const config = Config.get (),
+        isLeft = ( direction === 'left' ),
+        directionKey = isLeft ? 123 : 124;
+
+  const localBrowserScript = `
+    tell application "System Events" to tell process "Transmit"
+      click menu item "Local Browser" of menu 1 of menu bar item "View" of menu bar 1
+    end tell
+  `;
+
+  const openScript = `
     tell application "Transmit"
       reopen
       activate
     end tell
-    # tell application "System Events" to tell process "Transmit"
-    #   click menu item "Local Browser" of menu 1 of menu bar item "View" of menu bar 1
-    # end tell
+    ${!isLeft && config.switchToLocalBrowser ? localBrowserScript : ''}
     tell application "System Events"
       key code ${directionKey} using {option down, command down} # Focus on Panel
       keystroke "g" using {option down, command down} # Got to Folder...
@@ -32,7 +40,7 @@ function open ( direction = 'left', root? ) {
     end tell
   `;
 
-  applescript.execString ( script );
+  applescript.execString ( openScript );
 
 }
 

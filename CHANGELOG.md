@@ -1,3 +1,6 @@
+### Version 1.2.0
+- Added support for automatically switching to the local browser
+
 ### Version 1.1.0
 - Added multi-root support
 - Added `Open Root` commands
