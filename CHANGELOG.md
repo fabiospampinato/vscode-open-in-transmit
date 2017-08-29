@@ -1,3 +1,6 @@
+### Version 1.2.1
+- Updated readme
+
 ### Version 1.2.0
 - Added support for automatically switching to the local browser
 

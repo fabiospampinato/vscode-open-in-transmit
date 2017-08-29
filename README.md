@@ -8,7 +8,7 @@ Adds a few commands for opening the current file or project in [Transmit](https:
 
 Since Transmit doesn't provide a command line utility for interacting with it, this is implemented via an AppleScript.
 
-If you want to open something in Transmit's right panel be sure the "Local Browser" is active, instead of the "Remote Browser". If you activate the `openInTransmit.switchToLocalBrowser` setting this extension can do it for you, but this requires granting Visual Studio Code accessibility permissions (System Preferences -> Security & Privacy -> Privacy).
+If you want to open something in Transmit's right panel be sure the "Local Browser" is active, instead of the "Remote Browser". If you activate the `openInTransmit.switchToLocalBrowser` setting this extension can do it for you, but this requires granting Visual Studio Code accessibility permissions (System Preferences -> Security & Privacy -> Privacy -> Accessibility).
 
 ## Install
 
