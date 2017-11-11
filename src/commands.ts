@@ -11,7 +11,7 @@ import Utils from './utils';
 function open ( direction = 'left', root? ) {
 
   const {activeTextEditor} = vscode.window,
-        editorPath = activeTextEditor && activeTextEditor.document.fileName,
+        editorPath = activeTextEditor && activeTextEditor.document.uri.fsPath,
         folderPath = Utils.folder.getWrapperPath ( editorPath, root );
 
   if ( !folderPath ) return vscode.window.showErrorMessage ( 'You have to open a project or a file before opening it in Transmit' );
