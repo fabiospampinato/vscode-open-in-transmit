@@ -1,3 +1,6 @@
+### Version 1.2.5
+- Updated applescript
+
 ### Version 1.2.4
 - Updated readme
 
