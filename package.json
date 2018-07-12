@@ -14,17 +14,6 @@
     "onCommand:openInTransmit.openRootRight"
   ],
   "contributes": {
-    "configuration": {
-      "type": "object",
-      "title": "Open in Transmit - Configuration",
-      "properties": {
-        "openInTransmit.switchToLocalBrowser": {
-          "type": "boolean",
-          "description": "Automatically switch to the local browser",
-          "default": true
-        }
-      }
-    },
     "commands": [
       {
         "command": "openInTransmit.openLeft",
