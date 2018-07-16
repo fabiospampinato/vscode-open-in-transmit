@@ -1,3 +1,7 @@
+### Version 1.2.6
+- Updated logo
+- Readme: added a `Related` section
+
 ### Version 1.2.5
 - Updated applescript
 
