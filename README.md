@@ -27,6 +27,10 @@ It adds 4 commands to the command palette:
 'Open Root in Transmit (Right)' // Open the current project in Transmit's right panel
 ```
 
+## Related:
+
+- **[Transmit](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-transmit)**: Adds a few commands for interacting with Transmit.
+
 ## License
 
 MIT © Fabio Spampinato
