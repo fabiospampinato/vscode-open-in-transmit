@@ -1,3 +1,6 @@
+### Version 1.2.7
+- Bundling with webpack
+
 ### Version 1.2.6
 - Updated logo
 - Readme: added a `Related` section
