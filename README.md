@@ -1,7 +1,7 @@
 # Open in Transmit
 
 <p align="center">
-	<img src="https://raw.githubusercontent.com/fabiospampinato/vscode-open-in-transmit/master/resources/logo-128x128.png" alt="Logo">
+	<img src="https://raw.githubusercontent.com/fabiospampinato/vscode-open-in-transmit/master/resources/logo.png" width="128" alt="Logo">
 </p>
 
 Adds a few commands for opening the current file or project in [Transmit](https://panic.com/transmit).
