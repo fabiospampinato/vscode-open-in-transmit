@@ -1,72 +1,26 @@
 
 /* IMPORT */
 
-import * as _ from 'lodash';
-import * as absolute from 'absolute';
-import * as path from 'path';
-import * as vscode from 'vscode';
-import * as Commands from './commands';
+import {execFile} from 'node:child_process';
 
-/* UTILS */
+/* MAIN */
 
-const Utils = {
+const applescript = ( script: string ): Promise<string> => {
 
-  initCommands ( context: vscode.ExtensionContext ) {
+  return new Promise ( ( resolve, reject ) => {
 
-    const {commands} = vscode.extensions.getExtension ( 'fabiospampinato.vscode-open-in-transmit' ).packageJSON.contributes;
+    execFile ( 'osascript', ['-e', script], ( error, stdout, stderr ) => {
 
-    commands.forEach ( ({ command, title }) => {
+      if ( error ) return reject ( error );
 
-      const commandName = _.last ( command.split ( '.' ) ) as string,
-            handler = Commands[commandName],
-            disposable = vscode.commands.registerCommand ( command, () => handler () );
-
-      context.subscriptions.push ( disposable );
+      resolve ( stdout );
 
     });
 
-    return Commands;
-
-  },
-
-  folder: {
-
-    getParentPath ( basePath? ) {
-
-      return basePath && absolute ( basePath ) && path.dirname ( basePath );
-
-    },
-
-    getRootPath ( basePath? ) {
-
-      const {workspaceFolders} = vscode.workspace;
-
-      if ( !workspaceFolders ) return;
-
-      const firstRootPath = workspaceFolders[0].uri.fsPath;
-
-      if ( !basePath || !absolute ( basePath ) ) return firstRootPath;
-
-      const rootPaths = workspaceFolders.map ( folder => folder.uri.fsPath ),
-            sortedRootPaths = _.sortBy ( rootPaths, [path => path.length] ).reverse (); // In order to get the closest root
-
-      return sortedRootPaths.find ( rootPath => basePath.startsWith ( rootPath ) );
-
-    },
-
-    getWrapperPath ( basePath, root? ) {
-
-      const parentPath = () => Utils.folder.getParentPath ( basePath ),
-            rootPath = () => Utils.folder.getRootPath ( basePath );
-
-      return root ? rootPath () : parentPath () || rootPath ();
-
-    }
-
-  }
+  });
 
 };
 
 /* EXPORT */
 
-export default Utils;
+export {applescript}

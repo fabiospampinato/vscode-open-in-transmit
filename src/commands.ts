@@ -1,23 +1,24 @@
 
 /* IMPORT */
 
-import * as applescript from 'applescript';
-import * as vscode from 'vscode';
-import Utils from './utils';
+import path from 'node:path';
+import vscode from 'vscode';
+import {getProjectRootPath} from 'vscode-extras';
+import {applescript} from './utils';
 
-/* COMMANDS */
+/* MAIN */
 
-function open ( direction = 'left', root? ) {
+const open = ( direction: 'left' | 'right', root?: boolean ): void => {
 
-  const {activeTextEditor} = vscode.window,
-        editorPath = activeTextEditor && activeTextEditor.document.uri.fsPath,
-        folderPath = Utils.folder.getWrapperPath ( editorPath, root );
+  const rootPath = getProjectRootPath ();
+  const filePath = vscode.window.activeTextEditor?.document.uri.fsPath;
+  const targetPath = root ? rootPath : ( filePath ? path.dirname ( filePath ) : rootPath );
 
-  if ( !folderPath ) return vscode.window.showErrorMessage ( 'You have to open a project or a file before opening it in Transmit' );
+  if ( !targetPath ) return void vscode.window.showErrorMessage ( 'You have to open a project or a file before opening it in Transmit' );
 
   const keyCode = ( direction === 'left' ) ? 123 : 124;
 
-  applescript.execString (`
+  applescript (`
     on switch_to_local()
       tell application "System Events" to tell process "Transmit"
         key code ${keyCode} using {option down, command down} -- Focus on Panel
@@ -37,37 +38,37 @@ function open ( direction = 'left', root? ) {
         on error
           my switch_to_local()
         end try
-        change location to path "${folderPath}"
+        change location to path "${targetPath}"
       end tell
     end tell
   `);
 
-}
+};
 
-function openLeft () {
+const openLeft = (): void => {
 
   return open ( 'left' );
 
-}
+};
 
-function openRight () {
+const openRight = (): void => {
 
   return open ( 'right' );
 
-}
+};
 
-function openRootLeft () {
+const openRootLeft = (): void => {
 
   return open ( 'left', true );
 
-}
+};
 
-function openRootRight () {
+const openRootRight = (): void => {
 
   return open ( 'right', true );
 
-}
+};
 
 /* EXPORT */
 
-export {open, openLeft, openRight, openRootLeft, openRootRight};
+export {openLeft, openRight, openRootLeft, openRootRight};
