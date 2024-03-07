@@ -3,7 +3,7 @@
 
 import path from 'node:path';
 import vscode from 'vscode';
-import {getProjectRootPath} from 'vscode-extras';
+import {getActiveFilePath, getProjectRootPath} from 'vscode-extras';
 import {applescript} from './utils';
 
 /* MAIN */
@@ -11,7 +11,7 @@ import {applescript} from './utils';
 const open = ( direction: 'left' | 'right', root?: boolean ): void => {
 
   const rootPath = getProjectRootPath ();
-  const filePath = vscode.window.activeTextEditor?.document.uri.fsPath;
+  const filePath = getActiveFilePath ();
   const targetPath = root ? rootPath : ( filePath ? path.dirname ( filePath ) : rootPath );
 
   if ( !targetPath ) return void vscode.window.showErrorMessage ( 'You have to open a project or a file before opening it in Transmit' );
