@@ -1,20 +1,16 @@
 
 /* IMPORT */
 
-import path from 'node:path';
-import vscode from 'vscode';
-import {getActiveFilePath, getProjectRootPath} from 'vscode-extras';
+import {alert, getActiveFolderPath, getProjectRootPath} from 'vscode-extras';
 import {applescript} from './utils';
 
 /* MAIN */
 
 const open = ( direction: 'left' | 'right', root?: boolean ): void => {
 
-  const rootPath = getProjectRootPath ();
-  const filePath = getActiveFilePath ();
-  const targetPath = root ? rootPath : ( filePath ? path.dirname ( filePath ) : rootPath );
+  const targetPath = root ? getProjectRootPath () : getActiveFolderPath ();
 
-  if ( !targetPath ) return void vscode.window.showErrorMessage ( 'You have to open a project or a file before opening it in Transmit' );
+  if ( !targetPath ) return alert.error ( 'You have to open a project or a file before opening it in Transmit' );
 
   const keyCode = ( direction === 'left' ) ? 123 : 124;
 

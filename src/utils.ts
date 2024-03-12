@@ -1,26 +1,16 @@
 
 /* IMPORT */
 
-import {execFile} from 'node:child_process';
+import {exec} from 'vscode-extras';
 
 /* MAIN */
 
-const applescript = ( script: string ): Promise<string> => {
+const applescript = async ( script: string ): Promise<void> => {
 
-  return new Promise ( ( resolve, reject ) => {
-
-    execFile ( 'osascript', ['-e', script], ( error, stdout, stderr ) => {
-
-      if ( error ) return reject ( error );
-
-      resolve ( stdout );
-
-    });
-
-  });
+  await exec ( 'osascript', ['-e', script] );
 
 };
 
 /* EXPORT */
 
-export {applescript}
+export {applescript};
